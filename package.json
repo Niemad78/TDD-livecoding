@@ -9,7 +9,7 @@
     "migrate-db": "db-migrate up",
     "migrate-db-reset": "db-migrate reset",
     "rollback-last-db-migration": "db-migrate down",
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --maxWorkers=1",
     "test:migrate-db": "db-migrate up -e test",
     "test:migrate-db-reset": "db-migrate reset -e test",
     "test:rollback-last-db-migration": "db-migrate down -e test"
@@ -43,6 +43,8 @@
   },
   "devDependencies": {
     "jest": "^27.5.1",
-    "nodemon": "^2.0.15"
+    "jest-circus": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }

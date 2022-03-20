@@ -18,7 +18,7 @@ const closeApp = () => {
 };
 
 afterAll(async () => {
-  await deleteAllDBData();
+  await deleteAllData();
   await closeConnection();
   closeApp();
 })
