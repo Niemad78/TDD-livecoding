@@ -22,7 +22,9 @@ const authenticateWithJsonWebToken = (req, res, next) => {
         next();
       };
     });
-  };
+  } else {
+    res.status(401).json({errorMessage: "No access allowed"});
+  }
 };
 
 module.exports = {
