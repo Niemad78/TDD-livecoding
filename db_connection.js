@@ -30,13 +30,13 @@ const query = (...args) => new Promise((resolve, reject) => {
     if (err) {
       reject(err);
     } else {
-      resolve();
+      resolve(res);
     };
   });
 });
 
 const deleteAllDBData = async () => {
-  const tableNames = (await query(`SELECT * FROM information_schema.tables WHERE LOWER(table_schema) = ${DB_NAME} AND table_name != 'migrations'`)).map((row) => row.table_name || row.TABLE_NAME);
+  const tableNames = (await query(`SELECT table_name FROM information_schema.tables WHERE LOWER(table_schema) = '${DB_NAME}' AND table_name != 'migrations'`)).map((row) => row.table_name || row.TABLE_NAME);
   if (inTestEnv) {
     await query("SET FOREIGN_KEY_CHECKS=0;");
     tableNames.forEach(async(name) => {
