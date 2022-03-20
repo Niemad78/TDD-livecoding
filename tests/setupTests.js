@@ -5,7 +5,7 @@ const deleteAllData = async () => {
   await deleteAllDBData();
 };
 
-const closeApp = () => {
+const closeApp = () =>
   new Promise((resolve, reject) => {
     app.close((err) => {
       if (err) {
@@ -15,10 +15,9 @@ const closeApp = () => {
       };
     });
   });
-};
 
 afterAll(async () => {
-  await deleteAllDBData();
+  await deleteAllData();
   await closeConnection();
-  closeApp();
+  await closeApp();
 })
