@@ -1,7 +1,8 @@
-const { postImageObject } = require("../controllers/images.controlles");
+const { postImageObject, postImage, getImages } = require("../controllers/images.controlles");
 
 const router = require("express").Router();
 
-router.post("/", postImageObject);
+router.get("/", getImages);
+router.post("/", postImageObject, postImage);
 
 module.exports = router;
