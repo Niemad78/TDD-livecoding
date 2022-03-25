@@ -24,6 +24,13 @@ const DB_USER = getEnv(`DB_USER${inTestEnv ? '_TEST' : ''}`);
 const DB_PASS = getEnv(`DB_PASS${inTestEnv ? '_TEST' : ''}`);
 const DB_NAME = getEnv(`DB_NAME${inTestEnv ? '_TEST' : ''}`);
 
+const EMAIL_HOST = getEnv("EMAIL_HOST");
+const EMAIL_PORT = getEnv("EMAIL_PORT");
+const EMAIL_SECURE = getEnv("EMAIL_SECURE");
+const EMAIL_TO_SEND = getEnv("EMAIL_TO_SEND");
+const EMAIL_USED = getEnv("EMAIL_USED");
+const EMAIL_PASSWORD = getEnv("EMAIL_PASSWORD");
+
 module.exports = {
   inDevEnv,
   inTestEnv,
@@ -35,4 +42,10 @@ module.exports = {
   DB_USER,
   DB_PASS,
   DB_NAME,
+  EMAIL_HOST,
+  EMAIL_PORT,
+  EMAIL_SECURE,
+  EMAIL_TO_SEND,
+  EMAIL_USED,
+  EMAIL_PASSWORD,
 };
