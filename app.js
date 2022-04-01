@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mainRouter = require("./routes");
 const { CLIENT_ORIGIN, SERVER_PORT, inTestEnv } = require("./env");
+const socketIO = require("socket.io");
+const uniqid = require("uniqid");
 
 const app = express();
 
@@ -16,5 +18,36 @@ const server = app.listen(SERVER_PORT, () => {
     console.log(`Server is running on port ${SERVER_PORT}`);
   };
 });
+
+const io = socketIO(server, {
+  cors: {
+    origin: ["http://localhost:3000"],
+  },
+});
+
+const messageList = [
+  {id: uniqid(), author: "server", text: "Welcome to Wildchat"}
+];
+
+io.on("connect", (socket) => {
+  console.log("User connected");
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
+  })
+
+  socket.on("newMessageFromClient", (newMessageFromClient) => {
+    console.log(newMessageFromClient);
+    messageList.push({
+      id: uniqid(),
+      author: newMessageFromClient.author,
+      text: newMessageFromClient.text,
+    })
+
+    io.emit("updateMessageList", messageList);
+  })
+
+  io.emit("initialMessage", messageList);
+})
 
 module.exports = server;
