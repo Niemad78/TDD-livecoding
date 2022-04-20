@@ -1,14 +1,6 @@
-const res = require("express/lib/response");
 const multer = require("multer");
 const { postOne, getOne } = require("../models/image.models");
 
-/**
- * This function takes in a request and a response object. 
- * It then uses the multer library to upload a file to the public folder. 
- * It then returns a response object with a status of 200 and a message of "ok"
- * @param req - The request object.
- * @param res - The response object.
- */
 const postImageObject = (req, res, next) => {
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
